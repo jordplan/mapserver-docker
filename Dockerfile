@@ -1,4 +1,4 @@
-FROM debian:buster as builder
+FROM debian:bullseye as builder
 LABEL maintainer="PDOK dev <pdok@kadaster.nl>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -9,6 +9,7 @@ RUN apt-get -y update && \
         ca-certificates \
         gettext \
         bzip2 \
+        xz-utils \
         cmake \
         g++ \
         git \
@@ -25,11 +26,11 @@ RUN apt-get -y update && \
 
 RUN update-locale LANG=C.UTF-8
 
-ENV HARFBUZZ_VERSION 2.4.0
+ENV HARFBUZZ_VERSION 2.6.7
 
 RUN cd /tmp && \
-        wget https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$HARFBUZZ_VERSION.tar.bz2 && \
-        tar xjf harfbuzz-$HARFBUZZ_VERSION.tar.bz2 && \
+        wget https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$HARFBUZZ_VERSION.tar.xz && \
+        tar -xf harfbuzz-$HARFBUZZ_VERSION.tar.xz && \
         cd harfbuzz-$HARFBUZZ_VERSION && \
         ./configure && \
         make && \
@@ -115,7 +116,7 @@ RUN mkdir /usr/local/src/mapserver/build && \
     make install && \
     ldconfig
 
-FROM pdok/lighttpd:1.4-1 as service
+FROM pdok/lighttpd as service
 LABEL maintainer="PDOK dev <pdok@kadaster.nl>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -128,22 +129,22 @@ RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
         libpng16-16 \
-        python-cairo \
+        python3-cairo \
         libfreetype6 \
         libjpeg62-turbo \
         libfcgi0ldbl \
         libfribidi0 \
-        libgdal20 \
+        libgdal27 \
         libgeos-c1v5 \
         libglib2.0-0 \
-        libproj13 \
+        libproj19 \
         libxml2 \
         libxslt1.1 \
         libexempi8 \
         libpq5 \
         libfreetype6 \
         librsvg2-2 \
-        libprotobuf17 \
+        libprotobuf23 \
         libprotobuf-c1 \
         gettext-base \
         wget \
