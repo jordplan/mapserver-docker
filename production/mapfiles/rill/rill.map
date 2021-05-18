@@ -1,0 +1,83 @@
+#
+# Start of map file
+#
+MAP
+  NAME "Jordplan Rills - Draager"
+  STATUS ON
+  #SIZE 600 600
+  EXTENT 3.5 57 32 72
+  UNITS DD
+  ##SHAPEPATH "data"
+  IMAGECOLOR 255 255 255
+
+  IMAGETYPE PNG
+
+  CONFIG "CPL_DEBUG" "ON"
+  DEBUG 5
+  CONFIG "MS_ERRORFILE" "/tmp/rill_mapserver_error"
+
+  #
+  # Start of web interface definition (including WMS enabling metadata)
+  #
+  WEB
+    ##MINSCALE 1000
+    ##MAXSCALE 1550000
+
+    # change the next two lines to match your setup
+    IMAGEPATH "/var/lib/mapserver/tmp/"
+    IMAGEURL "/mapserver/tmp/"
+
+    METADATA
+      WMS_TITLE "Jordplan Rills"
+      WMS_ABSTRACT "Jordplan"
+      WMS_ACCESSCONSTRAINTS "Tjenesten skal kun benyttes av de som har f�tt eksplisitt tillatelse av Jordplan AS"
+
+      # change this value to match your setup
+      WMS_ONLINERESOURCE "http://jordplan.no/wms/public/rill"
+      WMS_SRS "EPSG:4326 EPSG:4258 EPSG:27391 EPSG:27392 EPSG:27393 EPSG:27394 EPSG:27395 EPSG:27396 EPSG:27397 EPSG:27398 EPSG:32631 EPSG:32632 EPSG:32633 EPSG:32634 EPSG:32635 EPSG:32636 EPSG:25831 EPSG:25832 EPSG:25833 EPSG:25834 EPSG:25835 EPSG:25836 EPSG:3785 EPSG:3857"
+      WMS_ENABLE_REQUEST "*"   ##necessary
+      WMS_FEATURE_INFO_MIME_TYPE "text/html"
+
+      #"wms_feature_info_mime_type" "text/plain"
+      #"wms_feature_info_mime_type" "text/html"
+    END
+  END
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  #
+  # Start of layer definitions
+  #
+  LAYER
+    NAME "rill"
+    STATUS ON
+    DEBUG 5
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
+    PROCESSING "CLOSE_CONNECTION=DEFER"
+    #DATA "the_geom from public.\"rill\""
+    DATA "the_geom from public.\"rill\" using unique id using srid=4326"
+    TYPE LINE
+    EXTENT 3.5 57 32 72
+    CLASS
+      STYLE
+        COLOR 255 128 0
+      END
+    END
+
+    HEADER "rill_head.html"
+    TEMPLATE "rill.html"
+    FOOTER "rill.html"
+
+    METADATA
+      WMS_TITLE "Jordplan Rills - Draager"
+      WMS_ABSTRACT "Rills - Draager"
+      wms_include_items "objectid,shape_leng"
+    END
+
+
+  END # rill
+
+END # Map File
