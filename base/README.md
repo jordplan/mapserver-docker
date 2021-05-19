@@ -1,5 +1,10 @@
 # Mapserver docker
 
+```
+docker run --rm -e MS_MAPFILE=/srv/data/example.map -p 8010:80 --name mapserver-example -v `pwd`/example:/srv/data eu.gcr.io/cloudmark2/mapserver-base
+``
+
+
 [![GitHub license](https://img.shields.io/github/license/PDOK/mapserver-docker)](https://github.com/PDOK/mapserver-docker/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/PDOK/mapserver-docker.svg)](https://github.com/PDOK/mapserver-docker/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/pdok/mapserver.svg)](https://hub.docker.com/r/pdok/mapserver)

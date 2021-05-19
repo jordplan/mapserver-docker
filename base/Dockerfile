@@ -1,5 +1,4 @@
 FROM debian:buster as builder
-LABEL maintainer="PDOK dev <pdok@kadaster.nl>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Amsterdam
@@ -43,7 +42,7 @@ RUN apt-get -y update && \
         libgif-dev \
         libjpeg-dev \
         libpq-dev \
-        librsvg2-dev \      
+        librsvg2-dev \
         libpng-dev \
         libfreetype6-dev \
         libjpeg-dev \
@@ -61,7 +60,7 @@ RUN apt-get -y update && \
 
 RUN apt-get -y update --fix-missing
 
-RUN git clone --single-branch -b rel-7-6-2 https://github.com/pdok/mapserver/ /usr/local/src/mapserver
+RUN git clone --single-branch -b rel-7-6-3 https://github.com/MapServer/MapServer/ /usr/local/src/mapserver
 
 RUN mkdir /usr/local/src/mapserver/build && \
     cd /usr/local/src/mapserver/build && \
@@ -106,7 +105,7 @@ RUN mkdir /usr/local/src/mapserver/build && \
         -DWITH_V8=OFF \
         -DBUILD_STATIC=OFF \
         -DLINK_STATIC_LIBMAPSERVER=OFF \
-        -DWITH_APACHE_MODULE=OFF \          
+        -DWITH_APACHE_MODULE=OFF \
         -DWITH_POINT_Z_M=ON \
         -DWITH_GENERIC_NINT=OFF \
         -DWITH_PROTOBUFC=ON \
@@ -116,7 +115,6 @@ RUN mkdir /usr/local/src/mapserver/build && \
     ldconfig
 
 FROM pdok/lighttpd:1.4-1 as service
-LABEL maintainer="PDOK dev <pdok@kadaster.nl>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Amsterdam
@@ -147,7 +145,12 @@ RUN apt-get -y update && \
         libprotobuf-c1 \
         gettext-base \
         wget \
+        fonts-crosextra-carlito \
+        fonts-dejavu \
+        fonts-arkpandora \
+        fonts-liberation2 \
         gnupg && \
+
     rm -rf /var/lib/apt/lists/*
 
 COPY etc/lighttpd.conf /lighttpd.conf
