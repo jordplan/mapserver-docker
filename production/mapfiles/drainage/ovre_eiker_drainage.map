@@ -32,7 +32,7 @@ MAP
       WMS_ACCESSCONSTRAINTS "Tjenesten skal kun benyttes av de som har faatt eksplisitt tillatelse av Jordplan AS"
 
       # change this value to match your setup
-      # WMS_ONLINERESOURCE "http://jordplan.no/wms/public/drainage"
+      WMS_ONLINERESOURCE "https://jordplan.no/wms/ovre_eiker/4cDapuwNXo/drainage"
       WMS_SRS "EPSG:4326 EPSG:4258 EPSG:27391 EPSG:27392 EPSG:27393 EPSG:27394 EPSG:27395 EPSG:27396 EPSG:27397 EPSG:27398 EPSG:32631 EPSG:32632 EPSG:32633 EPSG:32634 EPSG:32635 EPSG:32636 EPSG:25831 EPSG:25832 EPSG:25833 EPSG:25834 EPSG:25835 EPSG:25836 EPSG:3785 EPSG:3857"
       WMS_ENABLE_REQUEST "*"   ##necessary
       WMS_FEATURE_INFO_MIME_TYPE "text/html"
