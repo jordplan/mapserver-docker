@@ -55,7 +55,7 @@ MAP
     CONNECTIONTYPE POSTGIS
     CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
     #DATA "the_geom from drainage_pipe"
-    DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
+    DATA "dp.the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
      FROM kommune k
      LEFT JOIN drainage_pipe dp ON ST_Intersects(k.geom, dp.the_geom)
      WHERE k.nummer = '3048') as subquery using unique nid using srid=4326"
