@@ -27,7 +27,7 @@ MAP
     IMAGEURL "/mapserver/tmp/"
 
     METADATA
-      WMS_TITLE "Jordplan Drainage"
+      WMS_TITLE "Drenering - Jordplan"
       WMS_ABSTRACT "Jordplan"
       WMS_ACCESSCONSTRAINTS "Tjenesten skal kun benyttes av de som har faatt eksplisitt tillatelse av Jordplan AS"
 
@@ -54,10 +54,9 @@ MAP
     STATUS ON
     CONNECTIONTYPE POSTGIS
     CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
-    #DATA "the_geom from drainage_pipe"
-    DATA "dp.the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
+    DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
      FROM kommune k
-     LEFT JOIN drainage_pipe dp ON ST_Intersects(k.geom, dp.the_geom)
+     LEFT JOIN drainage_pipe dp ON ST_Intersects(ST_Transform(k.geom, 4326), dp.the_geom)
      WHERE k.nummer = '3048') as subquery using unique nid using srid=4326"
     TYPE LINE
     EXTENT 9.617885228359768 59.57255383956074 10.102183120671524 59.91967802626701
@@ -72,7 +71,7 @@ MAP
     FOOTER "drainage_pipe_tail.html"
 
     METADATA
-      WMS_TITLE "Jordplan Drainage Pipes"
+      WMS_TITLE "Drensledninger - Jordplan"
       WMS_ABSTRACT "Drainage pipes documented in Jordplan"
       wms_include_items "valid_from,dimension,method,material,length"
     END
