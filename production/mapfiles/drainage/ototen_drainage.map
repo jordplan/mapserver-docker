@@ -56,7 +56,7 @@ MAP
     CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
     DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
      FROM kommune k
-     LEFT JOIN drainage_pipe dp ON ST_Intersects(ST_Transform(k.geom, 4326), dp.the_geom)
+     LEFT JOIN drainage_pipe dp ON ST_Intersects(dp.the_geom, k.geom)
      WHERE k.nummer = '3442') as subquery using unique nid using srid=4326"
     TYPE LINE
     EXTENT 3.5 57 32 72
