@@ -1,0 +1,57 @@
+MAP
+  STATUS ON
+  #SIZE 600 600
+  EXTENT 3.5 57 32 72
+  UNITS DD
+  #SHAPEPATH "/srv/data"
+  IMAGECOLOR 255 255 25
+
+  CONFIG "CPL_DEBUG" "ON"
+  DEBUG 5
+  CONFIG "MS_ERRORFILE" "/tmp/hld_mapserver_error"
+
+  WEB
+    ##MINSCALE 1000
+    ##MAXSCALE 1550000
+
+    # change the next two lines to match your setup
+    IMAGEPATH "/var/lib/mapserver/tmp/"
+    IMAGEURL "/mapserver/tmp/"
+
+    METADATA
+      WMS_TITLE "Jordplan User data"
+      WMS_ABSTRACT "Jordplan"
+      WMS_ACCESSCONSTRAINTS "Tjenesten skal kun benyttes av de som har faatt eksplisitt tillatelse av Jordplan AS"
+
+      # change this value to match your setup
+      WMS_ONLINERESOURCE "http://jordplan.no/wms/public/user/hld"
+      WMS_SRS "EPSG:4326 EPSG:4258 EPSG:27391 EPSG:27392 EPSG:27393 EPSG:27394 EPSG:27395 EPSG:27396 EPSG:27397 EPSG:27398 EPSG:32631 EPSG:32632 EPSG:32633 EPSG:32634 EPSG:32635 EPSG:32636 EPSG:25831 EPSG:25832 EPSG:25833 EPSG:25834 EPSG:25835 EPSG:25836 EPSG:3785 EPSG:3857"
+      WMS_ENABLE_REQUEST "*"   ##necessary
+      WMS_FEATURE_INFO_MIME_TYPE "text/html"
+
+      #"wms_feature_info_mime_type" "text/plain"
+      #"wms_feature_info_mime_type" "text/html"
+    END
+  END
+  PROJECTION
+    "init=epsg:4326"
+  END
+  LAYER
+    NAME "kongseplerd_plant_health_vari"
+    DATA "/srv/data/user/kongseplerd_plant_health_vari.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
+  LAYER
+    NAME "kongseplerd_ortho_rgb"
+    DATA "/srv/data/user/kongseplerd_ortho_rgb.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
+  LAYER
+    NAME "kongseplerd_demo_color"
+    DATA "/srv/data/user/kongseplerd_demo_color.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
+END
