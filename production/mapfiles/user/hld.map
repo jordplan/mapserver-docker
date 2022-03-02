@@ -37,7 +37,7 @@ MAP
     "init=epsg:4326"
   END
   LAYER
-    NAME "verket_veien_25_feb_2022_ortho_rgb"
+    NAME "verket_veien_25_feb_22"
     DATA "/srv/data/user/verket_veien_25_feb_2022_ortho_rgb.tiff"
     TYPE RASTER
     STATUS ON
