@@ -37,6 +37,12 @@ MAP
     "init=epsg:4326"
   END
   LAYER
+    NAME "verket_veien_25_feb_2022_ortho_rgb"
+    DATA "/srv/data/user/verket_veien_25_feb_2022_ortho_rgb.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
+  LAYER
     NAME "kongseplerd_plant_health_vari"
     DATA "/srv/data/user/kongseplerd_plant_health_vari.tiff"
     TYPE RASTER
