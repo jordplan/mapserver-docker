@@ -38,25 +38,31 @@ MAP
   END
   LAYER
     NAME "verket_veien_25_feb_22"
-    DATA "/srv/data/user/verket_veien_25_feb_2022_ortho_rgb.tiff"
+    DATA "/srv/ortho/rhi/verket_veien_25_feb_2022_ortho_rgb.tiff"
     TYPE RASTER
     STATUS ON
   END
   LAYER
     NAME "kongseplerd_plant_health_vari"
-    DATA "/srv/data/user/kongseplerd_plant_health_vari.tiff"
+    DATA "/srv/ortho/rhi/kongseplerd_plant_health_vari.tiff"
     TYPE RASTER
     STATUS ON
   END
   LAYER
     NAME "kongseplerd_ortho_rgb"
-    DATA "/srv/data/user/kongseplerd_ortho_rgb.tiff"
+    DATA "/srv/ortho/rhi/kongseplerd_ortho_rgb.tiff"
     TYPE RASTER
     STATUS ON
   END
   LAYER
     NAME "kongseplerd_demo_color"
-    DATA "/srv/data/user/kongseplerd_demo_color.tiff"
+    DATA "/srv/ortho/rhi/kongseplerd_demo_color.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
+  LAYER
+    NAME "nede_og_over_tunnelen_13_mar_2022_ortho_rgb"
+    DATA "/srv/ortho/rhi/nede_og_over_tunnelen_13_mar_2022_ortho_rgb.tiff"
     TYPE RASTER
     STATUS ON
   END
