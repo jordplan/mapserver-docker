@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mapserver
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mapserver
+  template:
+    metadata:
+      labels:
+        app: mapserver
+    spec:
+      containers:
+      - image: eu.gcr.io/cloudmark2/mapserver:c1f1926
+        imagePullPolicy: Always
+        name: mapserver
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: ortho
+            mountPath: /srv/ortho
+      volumes:
+        - name: ortho
+          persistentVolumeClaim:
+            claimName: ortho
