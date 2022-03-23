@@ -66,4 +66,10 @@ MAP
     TYPE RASTER
     STATUS ON
   END
+  LAYER
+    NAME "bergantjern_20_mar_2022_ortho_rgb"
+    DATA "/srv/ortho/rhi/bergantjern_20_mar_2022_ortho_rgb.tiff"
+    TYPE RASTER
+    STATUS ON
+  END
 END
