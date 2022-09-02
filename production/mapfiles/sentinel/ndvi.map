@@ -34,7 +34,7 @@ MAP
     END
   END
   PROJECTION
-    "init=epsg:4326"
+    AUTO
   END
   LAYER
     NAME "t32vnl_220624"
