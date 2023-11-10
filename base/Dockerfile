@@ -1,17 +1,21 @@
 FROM debian:buster as builder
+LABEL maintainer="PDOK dev <https://github.com/PDOK/mapserver-docker/issues>"
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV TZ Europe/Amsterdam
+ENV TZ Europe/Oslo
 
 RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
         gettext \
-        bzip2 \
+        xz-utils \
         cmake \
+        gcc \
         g++ \
-        git \
+        libfreetype6-dev \
+        libglib2.0-dev \
         libcairo2-dev \
+        git \
         locales \
         make \
         patch \
@@ -24,11 +28,11 @@ RUN apt-get -y update && \
 
 RUN update-locale LANG=C.UTF-8
 
-ENV HARFBUZZ_VERSION 2.4.0
+ENV HARFBUZZ_VERSION 2.8.2
 
 RUN cd /tmp && \
-        wget https://www.freedesktop.org/software/harfbuzz/release/harfbuzz-$HARFBUZZ_VERSION.tar.bz2 && \
-        tar xjf harfbuzz-$HARFBUZZ_VERSION.tar.bz2 && \
+        wget https://github.com/harfbuzz/harfbuzz/releases/download/$HARFBUZZ_VERSION/harfbuzz-$HARFBUZZ_VERSION.tar.xz && \
+        tar xJf harfbuzz-$HARFBUZZ_VERSION.tar.xz && \
         cd harfbuzz-$HARFBUZZ_VERSION && \
         ./configure && \
         make && \
@@ -60,7 +64,7 @@ RUN apt-get -y update && \
 
 RUN apt-get -y update --fix-missing
 
-RUN git clone --single-branch -b rel-7-6-3 https://github.com/MapServer/MapServer/ /usr/local/src/mapserver
+RUN git clone --single-branch -b pdok-7-6-4-patch-5 https://github.com/pdok/mapserver/ /usr/local/src/mapserver
 
 RUN mkdir /usr/local/src/mapserver/build && \
     cd /usr/local/src/mapserver/build && \
@@ -114,19 +118,22 @@ RUN mkdir /usr/local/src/mapserver/build && \
     make install && \
     ldconfig
 
-FROM pdok/lighttpd:1.4-1 as service
+FROM pdok/lighttpd:1.4.67 AS service
+
+USER root
+LABEL maintainer="PDOK dev <https://github.com/PDOK/mapserver-docker/issues>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ Europe/Amsterdam
 
-COPY --from=0 /usr/local/bin /usr/local/bin
-COPY --from=0 /usr/local/lib /usr/local/lib
+COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /usr/local/lib /usr/local/lib
 
 RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
         libpng16-16 \
-        python-cairo \
+        python-cairocffi-doc \
         libfreetype6 \
         libjpeg62-turbo \
         libfcgi0ldbl \
@@ -145,25 +152,23 @@ RUN apt-get -y update && \
         libprotobuf-c1 \
         gettext-base \
         wget \
-        fonts-crosextra-carlito \
-        fonts-dejavu \
-        fonts-arkpandora \
-        fonts-liberation2 \
         gnupg && \
-
     rm -rf /var/lib/apt/lists/*
 
-COPY etc/lighttpd.conf /lighttpd.conf
+ADD config/lighttpd.conf /srv/mapserver/config/lighttpd.conf
+ADD config/include.conf /srv/mapserver/config/include.conf
+ADD config/request.lua /srv/mapserver/config/request.lua
 
 RUN chmod o+x /usr/local/bin/mapserv
 RUN apt-get clean
+USER www
 
 ENV DEBUG 0
-ENV MIN_PROCS 1
-ENV MAX_PROCS 3
-ENV MAX_LOAD_PER_PROC 4
+ENV MIN_PROCS 4
+ENV MAX_PROCS 8
+ENV MAX_LOAD_PER_PROC 1
 ENV IDLE_TIMEOUT 20
 
 EXPOSE 80
 
-CMD ["lighttpd", "-D", "-f", "/lighttpd.conf"]
+CMD ["lighttpd", "-D", "-f", "/srv/mapserver/config/lighttpd.conf"]

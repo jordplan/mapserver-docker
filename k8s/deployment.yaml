@@ -15,14 +15,16 @@ spec:
         app: mapserver
     spec:
       containers:
-      - image: eu.gcr.io/cloudmark2/mapserver:c1f1926
-        imagePullPolicy: Always
-        name: mapserver
-        ports:
-          - containerPort: 80
-        volumeMounts:
-          - name: ortho
-            mountPath: /srv/ortho
+        #- image: eu.gcr.io/cloudmark2/mapserver:48058be
+        - image: eu.gcr.io/cloudmark2/mapserver:a3f696c
+
+          imagePullPolicy: Always
+          name: mapserver
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: ortho
+              mountPath: /srv/ortho
       volumes:
         - name: ortho
           persistentVolumeClaim:
