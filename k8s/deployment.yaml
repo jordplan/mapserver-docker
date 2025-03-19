@@ -15,8 +15,7 @@ spec:
         app: mapserver
     spec:
       containers:
-        #- image: eu.gcr.io/cloudmark2/mapserver:48058be
-        - image: eu.gcr.io/cloudmark2/mapserver:a3f696c
+        - image: europe-north1-docker.pkg.dev/cloudmark2/main/mapserver:latest
 
           imagePullPolicy: Always
           name: mapserver

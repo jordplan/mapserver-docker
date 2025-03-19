@@ -1,4 +1,4 @@
-FROM eu.gcr.io/cloudmark2/mapserver-base:7d68932
+FROM europe-north1-docker.pkg.dev/cloudmark2/main/mapserver-base:b96cddc
 
 COPY mapfiles/ /srv/data
 COPY etc/mapserver_fontset /etc/mapserver_fontset
