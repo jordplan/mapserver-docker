@@ -57,7 +57,7 @@ MAP
     DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
      FROM kommune k
      LEFT JOIN drainage_pipe dp ON ST_Intersects(dp.the_geom, k.geom)
-     WHERE k.nummer = '3036') as subquery using unique nid using srid=4326"
+     WHERE k.nummer = '3238') as subquery using unique nid using srid=4326"
     TYPE LINE
     #EXTENT 3.5 57 32 72
     EXTENT 10.772026 60.106292 11.129198 60.346692
