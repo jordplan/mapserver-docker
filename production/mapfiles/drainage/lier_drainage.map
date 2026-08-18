@@ -56,7 +56,7 @@ MAP
     CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     #DATA "the_geom from drainage_pipe"
     DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
-     FROM kommune k
+     FROM not_used.kommune k
      LEFT JOIN drainage_pipe dp ON ST_Intersects(dp.the_geom, k.geom)
      WHERE k.nummer = '3312') as subquery using unique nid using srid=4326"
     TYPE LINE

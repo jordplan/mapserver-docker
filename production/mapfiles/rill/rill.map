@@ -57,8 +57,8 @@ MAP
     CONNECTIONTYPE POSTGIS
     CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     PROCESSING "CLOSE_CONNECTION=DEFER"
-    #DATA "the_geom from public.\"rill\""
-    DATA "the_geom from public.\"rill\" using unique id using srid=4326"
+    #DATA "the_geom from not_used.\"rill\""
+    DATA "the_geom from not_used.\"rill\" using unique id using srid=4326"
     TYPE LINE
     EXTENT 3.5 57 32 72
     CLASS
