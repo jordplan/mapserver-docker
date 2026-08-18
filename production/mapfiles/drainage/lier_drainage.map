@@ -53,7 +53,7 @@ MAP
     NAME "drainage_pipe"
     STATUS ON
     CONNECTIONTYPE POSTGIS
-    CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
+    CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     #DATA "the_geom from drainage_pipe"
     DATA "the_geom from (select dp.nid, dp.the_geom, dp.dimension, dp.method, to_char(dp.valid_from,'YYYY-MM-DD') valid_from, dp.material, dp.length
      FROM kommune k

@@ -56,7 +56,7 @@ MAP
     NAME "pcn"
     STATUS ON
     CONNECTIONTYPE POSTGIS
-    CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
+    CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     DATA "the_geom FROM pcn_property_area USING srid=32632 USING unique id"
     #CLASSITEM 'kategori'
     LABELITEM "label"

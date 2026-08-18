@@ -53,7 +53,7 @@ MAP
     NAME "drainage_pipe"
     STATUS ON
     CONNECTIONTYPE POSTGIS
-    CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
+    CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     DATA "the_geom from drainage_pipe"
     TYPE LINE
     EXTENT 3.5 57 32 72

@@ -55,7 +55,7 @@ MAP
     STATUS ON
     DEBUG 5
     CONNECTIONTYPE POSTGIS
-    CONNECTION "host=db1 port=5432 dbname=drupal user=mapserver password=AGj3439ZhQXCR"
+    CONNECTION "host=db2 port=5432 dbname=prod_jordplan user=mapserver password=AGj3439ZhQXCR"
     PROCESSING "CLOSE_CONNECTION=DEFER"
     #DATA "the_geom from public.\"rill\""
     DATA "the_geom from public.\"rill\" using unique id using srid=4326"
